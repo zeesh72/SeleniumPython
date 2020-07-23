@@ -1,30 +1,33 @@
 import unittest
 from selenium import webdriver
 import logging
+from configparser import ConfigParser
 
 
 class setupEnv(unittest.TestCase):
 
-    path = "C:\\Users\\Zeeshan_Ali\\Downloads\\chromedriver_win32 (2)\\chromedriver.exe"
-    url = "https://www.amazon.in/"
-    logFilePath = "C://Users//Zeeshan_Ali//PycharmProjects//SeleniumPython//AmazonDemo//LogFiles//log.txt"
-
+    file ='C:\\Users\\Zeeshan_Ali\\PycharmProjects\\SeleniumPython\\AmazonDemo\\config.ini'
+    config = ConfigParser()
+    config.read(file)
 
     def setUp(self):
-        s = setupEnv
-        self.driver = webdriver.Chrome(executable_path=s.path)
+        setup = setupEnv
+        print("--------------------------------------------------")
+        print("Test case sarted")
+        self.driver = webdriver.Chrome(executable_path=setup.config['EnvVar']['path'])
         print('Chrome browser launching')
-        self.driver.get(s.url)
-        print('Navigating to ',s.url)
+        self.driver.get(setup.config['EnvVar']['url'])
+        print('Navigated to ',setup.config['EnvVar']['url'])
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
+
 
     def tearDown(self):
         print('Test execution completed')
         self.driver.close()
         self.driver.quit()
 
-    def log_Config(self):
+    def logger_Config(self):
         s = setupEnv
         logging.basicConfig(filename=s.logFilePath,
                             format=' %(asctime) s: %(lavelname)s: %(message)s',

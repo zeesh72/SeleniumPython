@@ -9,17 +9,14 @@ class HomePage(setupEnv):
     txt_SearchBox = 'twotabsearchtextbox'
     btn_Search = "//input[@type='submit']"
 
-    #Test Data
-    search_Product = 'OnePlus 8 (Glacial Green 6GB RAM+128GB Storage)'
-    pagetitle = 'Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in'
-
     def getPageTitle(self):
         title=self.driver.title
 
     def enterProductNameInSearchBox(self):
         home = HomePage
+        s = setupEnv
         self.driver.find_element_by_id(home.txt_SearchBox).clear()
-        self.driver.find_element_by_id(home.txt_SearchBox).send_keys(home.search_Product)
+        self.driver.find_element_by_id(home.txt_SearchBox).send_keys(s.config['TestData']['search_Product'])
         print('user able to enter search product in search box')
         logging.info('user able to enter search product in search box')
 
